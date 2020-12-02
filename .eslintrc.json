@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "rules": {
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "import/no-unresolved": "off",
+    "arrow-parens": "off",
+    "no-underscore-dangle": "off",
+    "no-multi-assign": "off",
+    "react/button-has-type": "off",
+    "no-plusplus": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "semi": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}

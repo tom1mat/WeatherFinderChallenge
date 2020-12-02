@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const { REACT_APP_OPENWEATHERMAP_API_KEY } = process.env;
 
@@ -14,12 +14,13 @@ class App extends React.Component {
     description: undefined,
     error: undefined,
   };
+
   getWeather = async (e) => {
     e.preventDefault();
-    const city = e.target.elements.city.value || "Madrid";
-    const country = e.target.elements.country.value || "es";
+    const city = e.target.elements.city.value || 'Madrid';
+    const country = e.target.elements.country.value || 'es';
     const api_call = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`,
     );
     const data = await api_call.json();
     if (city && country) {
@@ -29,7 +30,7 @@ class App extends React.Component {
         country: data.sys.country,
         humidity: data.main.humidity,
         description: data.weather[0].description,
-        error: "",
+        error: '',
       });
     } else {
       this.setState({
@@ -38,10 +39,11 @@ class App extends React.Component {
         country: undefined,
         humidity: undefined,
         description: undefined,
-        error: "Please enter the values.",
+        error: 'Please enter the values.',
       });
     }
   };
+
   render() {
     return (
       <div>
@@ -66,41 +68,41 @@ class App extends React.Component {
                   <div className="weather__info">
                     {this.state.city && this.state.country && (
                       <p className="weather__key">
-                        {" "}
+                        {' '}
                         Location:
                         <span className="weather__value">
-                          {" "}
+                          {' '}
                           {this.state.city}, {this.state.country}
                         </span>
                       </p>
                     )}
                     {this.state.temperature && (
                       <p className="weather__key">
-                        {" "}
+                        {' '}
                         Temperature:
                         <span className="weather__value">
-                          {" "}
-                          {this.state.temperature}{" "}
+                          {' '}
+                          {this.state.temperature}{' '}
                         </span>
                       </p>
                     )}
                     {this.state.humidity && (
                       <p className="weather__key">
-                        {" "}
+                        {' '}
                         Humidity:
                         <span className="weather__value">
-                          {" "}
-                          {this.state.humidity}{" "}
+                          {' '}
+                          {this.state.humidity}{' '}
                         </span>
                       </p>
                     )}
                     {this.state.description && (
                       <p className="weather__key">
-                        {" "}
+                        {' '}
                         Conditions:
                         <span className="weather__value">
-                          {" "}
-                          {this.state.description}{" "}
+                          {' '}
+                          {this.state.description}{' '}
                         </span>
                       </p>
                     )}
@@ -118,4 +120,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));

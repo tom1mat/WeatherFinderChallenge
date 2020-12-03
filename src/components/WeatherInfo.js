@@ -1,54 +1,62 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const WeatherInfo = ({
-  city, country, temperature, humidity, description, error,
-}) => (
-  <div className="weather__info">
-    {city && country && (
-      <p className="weather__key">
-        {' '}
+import { useWeatherContext } from 'WeatherContext';
+
+const WeatherInfo = () => {
+  const { weatherData } = useWeatherContext();
+
+  if (!weatherData) return null;
+
+  const { city, country, temperature, humidity, description, error } = weatherData;
+
+  return (
+    <div className="weather__info">
+      {city && country && (
+        <p className="weather__key">
+          {' '}
         Location:
-        <span className="weather__value">
+          <span className="weather__value">
+            {' '}
+            {city}, {country}
+          </span>
+        </p>
+      )}
+      {temperature && (
+        <p className="weather__key">
           {' '}
-          {city}, {country}
-        </span>
-      </p>
-    )}
-    {temperature && (
-      <p className="weather__key">
-        {' '}
         Temperature:
-        <span className="weather__value">
+          <span className="weather__value">
+            {' '}
+            {temperature}{' '}
+          </span>
+        </p>
+      )}
+      {humidity && (
+        <p className="weather__key">
           {' '}
-          {temperature}{' '}
-        </span>
-      </p>
-    )}
-    {humidity && (
-      <p className="weather__key">
-        {' '}
         Humidity:
-        <span className="weather__value">
+          <span className="weather__value">
+            {' '}
+            {humidity}{' '}
+          </span>
+        </p>
+      )}
+      {description && (
+        <p className="weather__key">
           {' '}
-          {humidity}{' '}
-        </span>
-      </p>
-    )}
-    {description && (
-      <p className="weather__key">
-        {' '}
         Conditions:
-        <span className="weather__value">
-          {' '}
-          {description}{' '}
-        </span>
-      </p>
-    )}
-    {error && (
-      <p className="weather__error">{error}</p>
-    )}
-  </div>
-);
+          <span className="weather__value">
+            {' '}
+            {description}{' '}
+          </span>
+        </p>
+      )}
+      {error && (
+        <p className="weather__error">{error}</p>
+      )}
+    </div>
+  );
+};
 
 export default WeatherInfo;

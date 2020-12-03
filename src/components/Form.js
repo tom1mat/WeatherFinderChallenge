@@ -1,12 +1,26 @@
 /* eslint-disable */
 import React from 'react';
 
-const Form = ({ onSubmit }) => (
-  <form onSubmit={onSubmit}>
-    <input type="text" name="city" placeholder="Madrid" />
-    <input type="text" name="country" placeholder="es" />
-    <button>Get Weather</button>
-  </form>
-);
+import useWeatherService from 'hooks/useWeatherService';
+import Button from 'components/Button';
+import Input from 'components/Input';
+
+const Form = () => {
+  const { loading, fetchWeather, error } = useWeatherService();
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const city = event.target.elements.city.value || 'Madrid';
+    const country = event.target.elements.country.value || 'es';
+    fetchWeather(city, country);
+  };
+
+  return (
+    <form onSubmit={onSubmit}>
+      <Input type="text" name="city" placeholder="Madrid" />
+      <Input type="text" name="country" placeholder="es" />
+      <Button text="Get Weather" loading={loading} />
+    </form>
+  );
+}
 
 export default Form;

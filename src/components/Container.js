@@ -1,5 +1,5 @@
-/* eslint-disable */
 import React from 'react';
+import propTypes from 'prop-types';
 
 const Container = ({ children, className }) => (
   <div className={className}>
@@ -8,3 +8,12 @@ const Container = ({ children, className }) => (
 );
 
 export default Container;
+
+Container.defaultProps = {
+  className: '',
+};
+
+Container.propTypes = {
+  children: propTypes.element.isRequired,
+  className: propTypes.string,
+};

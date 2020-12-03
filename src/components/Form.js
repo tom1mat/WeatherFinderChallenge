@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
 
 import useWeatherService from 'hooks/useWeatherService';
@@ -10,6 +9,8 @@ const Form = () => {
 
   useEffect(() => {
     if (error) {
+      // Here I would handle notifications with a global context.
+      // eslint-disable-next-line no-alert
       alert(error);
     }
   }, [error]);
@@ -27,6 +28,6 @@ const Form = () => {
       <Button text="Get Weather" loading={loading} />
     </form>
   );
-}
+};
 
 export default Form;

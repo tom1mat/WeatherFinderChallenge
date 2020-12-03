@@ -1,12 +1,16 @@
 /* eslint-disable */
-import React, { createContext, useMemo, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-const Context = createContext({ weatherData: null, setWeatherData: () => { } });
+import { storage } from 'utils';
+
+const [lastSearch] = storage('localStorage', 'lastSearch', null);
+
+const Context = createContext({ weatherData: lastSearch, setWeatherData: () => { } });
 
 export const useWeatherContext = () => useContext(Context);
 
 const WeatherContext = ({ children }) => {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState(lastSearch);
 
   return (
     <Context.Provider value={{ weatherData, setWeatherData }}>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useWeatherService from 'hooks/useWeatherService';
 import Button from 'components/Button';
@@ -7,6 +7,12 @@ import Input from 'components/Input';
 
 const Form = () => {
   const { loading, fetchWeather, error } = useWeatherService();
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
   const onSubmit = (event) => {
     event.preventDefault();
     const city = event.target.elements.city.value || 'Madrid';

@@ -4,6 +4,11 @@ import { REACT_APP_OPENWEATHERMAP_API_KEY, API_URL } from '../../config';
 
 import mapper from './mapper';
 
+const statusMessages = {
+  404: 'Sorry, we could not find the weather for that city :(',
+  500: 'Sorry, the service throwed an unexpected error :(',
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const get = async (city, country) => {
   if (!city || !country) {
@@ -27,9 +32,11 @@ export const get = async (city, country) => {
       };
     }
 
+    const statusMessage = statusMessages[response.status] || 'Sorry, an unknown error happened :(';
+
     return {
       data: null,
-      error: 'Service temporally unavailable',
+      error: statusMessage,
     };
   } catch (error) {
     logger.error('Error in getWeather', error.message);

@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import WeatherInfo from './components/WeatherInfo';
-import Form from './components/Form';
-import Container from './components/Container';
+import WeatherInfo from 'components/WeatherInfo';
+import Form from 'components/Form';
+import Container from 'components/Container';
 
-const { REACT_APP_OPENWEATHERMAP_API_KEY } = process.env;
+  import { get as getWeather } from 'services/weather';
 
 const App = () => {
   const [data, setData] = useState({});
@@ -16,19 +16,10 @@ const App = () => {
     e.preventDefault();
     const city = e.target.elements.city.value || 'Madrid';
     const country = e.target.elements.country.value || 'es';
-    const apiCall = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`,
-    );
-    const weatherData = await apiCall.json();
+
     if (city && country) {
-      setData({
-        temperature: weatherData.main.temp,
-        city: weatherData.name,
-        country: weatherData.sys.country,
-        humidity: weatherData.main.humidity,
-        description: weatherData.weather[0].description,
-        error: '',
-      });
+      const { data: _data } = await getWeather(city, country);
+      setData(_data);
     }
   };
 
@@ -39,9 +30,9 @@ const App = () => {
           <div className="row">
             <Container className="col-5 title-container">
               <h1 className="title-container__title">Weather Finder</h1>
-              <h3 className="title-container__subtitle">
+              <h2 className="title-container__subtitle">
                 Find out temperature, conditions and more...
-              </h3>
+              </h2>
             </Container>
             <Container className="col-7 form-container">
               <Form onSubmit={handleSubmitForm} />

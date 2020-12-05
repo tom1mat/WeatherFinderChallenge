@@ -5,20 +5,29 @@ import { useWeatherContext } from 'WeatherContext';
 import WeatherRow from 'components/WeatherRow';
 
 const WeatherInfo = () => {
-  const { weatherData } = useWeatherContext();
+  const { weatherData, error } = useWeatherContext();
 
-  if (!weatherData) return null;
+  let content = null;
 
-  const {
-    city, country, temperature, humidity, description,
-  } = weatherData;
+  if (weatherData) {
+    const {
+      city, country, temperature, humidity, description,
+    } = weatherData;
+
+    content = (
+      <>
+        <WeatherRow property="Location" value={city && country ? `${city}, ${country}` : null} />
+        <WeatherRow property="Temperature" value={temperature} />
+        <WeatherRow property="Humidity" value={humidity} />
+        <WeatherRow property="Conditions" value={description} />
+      </>
+    );
+  }
 
   return (
     <div className="weather__info">
-      <WeatherRow property="Location" value={city && country ? `${city}, ${country}` : null} />
-      <WeatherRow property="Temperature" value={temperature} />
-      <WeatherRow property="Humidity" value={humidity} />
-      <WeatherRow property="Conditions" value={description} />
+      {content}
+      {error && <p className="weather__error">{error}</p>}
     </div>
   );
 };

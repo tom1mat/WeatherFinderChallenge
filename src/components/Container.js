@@ -14,6 +14,6 @@ Container.defaultProps = {
 };
 
 Container.propTypes = {
-  children: propTypes.element.isRequired,
+  children: propTypes.node.isRequired,
   className: propTypes.string,
 };

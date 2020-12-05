@@ -8,8 +8,7 @@ const [, setLastSearch] = storage('localStorage', 'lastSearch', null);
 
 const useWeatherService = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const { setWeatherData } = useWeatherContext();
+  const { setWeatherData, setError } = useWeatherContext();
 
   const fetchWeather = (city, country) => {
     setLoading(true);
@@ -25,7 +24,6 @@ const useWeatherService = () => {
   return {
     loading,
     fetchWeather,
-    error,
   };
 };
 

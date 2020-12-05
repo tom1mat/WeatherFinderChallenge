@@ -14,5 +14,5 @@ export default WeatherRow;
 
 WeatherRow.propTypes = {
   property: propTypes.string.isRequired,
-  value: propTypes.string.isRequired,
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
 };

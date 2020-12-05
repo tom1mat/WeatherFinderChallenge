@@ -2,14 +2,15 @@ import React from 'react';
 import cls from 'classnames';
 import propTypes from 'prop-types';
 
-const Button = ({ loading, text, type }) => (
+const Button = ({
+  disabled, loading, text, type,
+}) => (
   <button
-    className={cls('button', { loading: 'button--disabled' })}
-    disabled={loading}
+    className={cls('button', { [loading || disabled]: 'button--disabled', loading: 'button--loading' })}
+    disabled={loading || disabled}
     type={type}
   >
-    {/* TODO: fix the button width for not being moved in the UI */}
-    {loading ? 'Loading...' : text}
+    {loading ? 'Loading' : text}
   </button>
 );
 
@@ -19,10 +20,12 @@ Button.defaultProps = {
   loading: false,
   text: '',
   type: '',
+  disabled: false,
 };
 
 Button.propTypes = {
   loading: propTypes.bool,
   text: propTypes.string,
   type: propTypes.string,
+  disabled: propTypes.bool,
 };

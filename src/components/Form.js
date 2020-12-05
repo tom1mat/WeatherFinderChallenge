@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import useWeatherService from 'hooks/useWeatherService';
 import Button from 'components/Button';
 import Input from 'components/Input';
 
 const Form = () => {
-  const { loading, fetchWeather, error } = useWeatherService();
+  const { loading, fetchWeather } = useWeatherService();
 
-  useEffect(() => {
-    if (error) {
-      // Here I would handle notifications with a global context.
-      // eslint-disable-next-line no-alert
-      alert(error);
-    }
-  }, [error]);
   const onSubmit = (event) => {
     event.preventDefault();
     const city = event.target.elements.city.value || 'Madrid';

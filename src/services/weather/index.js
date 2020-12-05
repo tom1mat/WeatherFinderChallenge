@@ -1,13 +1,8 @@
 import logger from 'logger';
 
-import { REACT_APP_OPENWEATHERMAP_API_KEY, API_URL } from '../../config';
+import { REACT_APP_OPENWEATHERMAP_API_KEY, API_URL, statusMessages } from '../../config';
 
 import mapper from './mapper';
-
-const statusMessages = {
-  404: 'Sorry, we could not find the weather for that city :(',
-  500: 'Sorry, the service throwed an unexpected error :(',
-};
 
 // eslint-disable-next-line import/prefer-default-export
 export const get = async (city, country) => {
@@ -19,6 +14,7 @@ export const get = async (city, country) => {
   }
 
   try {
+    // TODO: split the queryparams in an object
     const response = await fetch(
       `${API_URL}/weather?q=${city},${country}&appid=${REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`,
     );
@@ -43,7 +39,7 @@ export const get = async (city, country) => {
 
     return {
       data: null,
-      error: 'Unknown error',
+      error: 'Internal error, if it persists please contact the system administrator',
     };
   }
 };

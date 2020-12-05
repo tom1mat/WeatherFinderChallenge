@@ -1,6 +1,6 @@
 import logger from 'logger';
 
-import { REACT_APP_OPENWEATHERMAP_API_KEY, API_URL, statusMessages } from '../../config';
+import { REACT_APP_OPENWEATHERMAP_API_KEY, urls, statusMessages } from '../../config';
 
 import mapper from './mapper';
 
@@ -14,10 +14,13 @@ export const get = async (city, country) => {
   }
 
   try {
-    // TODO: split the queryparams in an object
-    const response = await fetch(
-      `${API_URL}/weather?q=${city},${country}&appid=${REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`,
-    );
+    const params = new URLSearchParams({
+      appid: REACT_APP_OPENWEATHERMAP_API_KEY,
+      units: 'metric',
+      q: `${city},${country}`,
+    });
+
+    const response = await fetch(`${urls.GET_WEATHER}?${params.toString()}`);
 
     if (response.ok) {
       const data = mapper(await response.json());

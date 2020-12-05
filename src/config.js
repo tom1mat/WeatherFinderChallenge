@@ -5,3 +5,6 @@ export const statusMessages = {
   500: 'Sorry, the service throwed an unexpected error :(',
 };
 export const LOGS_OFF = true;
+export const urls = {
+  GET_WEATHER: `${API_URL}/weather`,
+};

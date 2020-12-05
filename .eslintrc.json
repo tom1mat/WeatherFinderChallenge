@@ -15,5 +15,8 @@
     "react/jsx-one-expression-per-line": "off",
     "semi": 1,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "globals": {
+    "cy": true
   }
 }

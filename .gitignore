@@ -4,3 +4,8 @@
 .editorconfig
 .env
 .eslintcache
+
+/cypress/plugins
+/cypress/screenshots
+/cypress/support
+/cypress/videos

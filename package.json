@@ -15,7 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom ./src/tests/unit",
-    "test:e2e": "cypress run",
+    "test:e2e": "npm start & cypress run",
     "eject": "react-scripts eject",
     "lint": "eslint src"
   },
